@@ -45,3 +45,12 @@ form{
 .multiselect-container.dropdown-menu li {
     margin-bottom: 6px;
 }
+b2{
+width: 100%;
+box-sizing: border-box;
+padding: 200px;
+display: block;
+font-size: 26px;
+color: silver;
+text-align: center;
+}
