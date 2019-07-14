@@ -68,7 +68,12 @@ const drowForm = () => {
 }
 var show
 const filter = () => {
-    console.log($(natSdgsSel).val(),    $(projectsSel).val(),    $(natOrgsSel).val(),    $(intOrgsSel).val())
+    if($(natSdgsSel).val() ||  $(projectsSel).val() || $(natOrgsSel).val() ||  $(intOrgsSel).val()) {
+        document.getElementsByTagName('b2').setAttribute('style', 'display:none;')
+    } else {
+        document.getElementsByTagName('b2').setAttribute('style', '')
+    }
+    
     show = []
     if($(projectsSel).val()){
         show = show.concat($(projectsSel).val())
@@ -130,6 +135,7 @@ const filter = () => {
             matrix[fullHash.indexOf(row.project)][fullHash.indexOf(sdg_)] = 1
         })
     });
+    
     d3.selectAll("svg").remove()
     setTimeout(() => draw(matrix), 200)
     
