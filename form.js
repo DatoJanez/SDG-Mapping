@@ -69,9 +69,9 @@ const drowForm = () => {
 var show
 const filter = () => {
     if($(natSdgsSel).val() ||  $(projectsSel).val() || $(natOrgsSel).val() ||  $(intOrgsSel).val()) {
-        document.getElementsByTagName('b2').setAttribute('style', 'display:none;')
+        document.getElementsByTagName('b2')[0].setAttribute('style', 'display:none;')
     } else {
-        document.getElementsByTagName('b2').setAttribute('style', '')
+        document.getElementsByTagName('b2')[0].setAttribute('style', '')
     }
     
     show = []
