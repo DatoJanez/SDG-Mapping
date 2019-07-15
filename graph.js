@@ -1,8 +1,9 @@
-var height = window.innerHeight
-var width = window.innerWidth - 360
+
 
 var l = 0;
 const draw = (matrix_) => {
+    var height = window.innerHeight
+    var width = window.innerWidth - 360
     var svg = d3.select("#chart")
         .append("svg")
         .attr("width", width)
