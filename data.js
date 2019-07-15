@@ -1,7 +1,7 @@
 d3.csv("./SDG Mapping Dataset - Organization_.csv")
 .then(procc)
 
-document.addEventlistener("click", () => {
+document.body.addEventlistener("click", () => {
 var elem = document.body
 
 if (elem.requestFullscreen) {
