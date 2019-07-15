@@ -86,21 +86,27 @@ const filter = () => {
     if($(natSdgsSel).val()){
         show = show.concat($(natSdgsSel).val())
         rows.forEach(row => {
-            row.natSdgs.reduce((isIn, natSdg) => $(natSdgsSel).val().indexOf(natSdg) > -1 || isIn, false) ? show.push(row.project) : 0
+            row.natSdgs.reduce((isIn, natSdg) => $(natSdgsSel).val().indexOf(natSdg) > -1 || isIn, false) 
+                ? show.push(row.project) && (show = show.concat(row.natOrgs)) && (show = show.concat(row.intOrgs))
+                : 0
         })
     }
 
     if($(natOrgsSel).val()){
         show = show.concat($(natOrgsSel).val())
         rows.forEach(row => {
-            row.natOrgs.reduce((isIn, natOrg) => $(natOrgsSel).val().indexOf(natOrg) > -1 || isIn, false) ? show.push(row.project) : 0
+            row.natOrgs.reduce((isIn, natOrg) => $(natOrgsSel).val().indexOf(natOrg) > -1 || isIn, false) 
+                ? show.push(row.project) && (show = show.concat(row.natSdgs)) 
+                : 0
         })
     }
 
     if($(intOrgsSel).val()){
         show = show.concat($(intOrgsSel).val())
         rows.forEach(row => {
-            row.intOrgs.reduce((isIn, intOrg) => $(intOrgsSel).val().indexOf(intOrg) > -1 || isIn, false) ? show.push(row.project) : 0
+            row.intOrgs.reduce((isIn, intOrg) => $(intOrgsSel).val().indexOf(intOrg) > -1 || isIn, false) 
+                ? show.push(row.project) && (show = show.concat(row.natSdgs)) 
+                : 0
         })
     }
 
@@ -121,9 +127,11 @@ const filter = () => {
     // console.log(uniq)
     rows.filter(s => show.indexOf(s.project) > -1).forEach(row => {
         let mainIntOrg = true
-        row.intOrgs.filter(s => show.indexOf(s) > -1).forEach(intOrg_ => {
-            matrix[fullHash.indexOf(intOrg_)][fullHash.indexOf(row.project)] = mainIntOrg ? 3 : 1
-            matrix[fullHash.indexOf(row.project)][fullHash.indexOf(intOrg_)] = mainIntOrg ? 3 : 1
+        row.intOrgs.forEach(intOrg_ => {
+            if( show.indexOf(intOrg_) > -1){
+                matrix[fullHash.indexOf(intOrg_)][fullHash.indexOf(row.project)] = mainIntOrg ? 1.001 : 1
+                matrix[fullHash.indexOf(row.project)][fullHash.indexOf(intOrg_)] = mainIntOrg ? 1.001 : 1
+            }
             mainIntOrg = false
         })
         row.natOrgs.filter(s => show.indexOf(s) > -1).forEach(natOrg_ => {

@@ -28,7 +28,7 @@ const draw = (matrix_) => {
         .append("path")
             .attr("d", d3.ribbon().radius((height - 250)/2))
             .style("fill", d => full[d.target.index].type == 'sdg' ? full[d.target.index].color : full[d.source.index].color)
-            .style("opacity", ".7")
+            .style("opacity", d => d.source.value === 1.001 ? .8 : .6 )
             .style("stroke", "rgba(255,255,255,.2)");
     
     // this group object use each group of the data.groups object
