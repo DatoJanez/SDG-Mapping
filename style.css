@@ -136,3 +136,10 @@ b {
     color: rgba(0,0,0,.6);
 
 }
+path{
+    transition: .3s;
+    cursor: pointer;
+}
+path:hover {
+    opacity: 1 !important;
+}
